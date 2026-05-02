@@ -47,50 +47,44 @@ const TaskManager = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-200 via-cyan-200 to-teal-200 p-6 flex items-center justify-center">
-      <div className="bg-white/90 backdrop-blur-sm shadow-2xl rounded-3xl p-8 w-full max-w-2xl transition-all duration-300 hover:shadow-cyan-300/50">
+    <div className="min-h-screen bg-gray-50 p-6 flex items-center justify-center">
+      <div className="bg-white shadow-lg rounded-lg p-6 w-full max-w-2xl">
         {/* Header Section */}
-        <div className="text-center mb-6">
-          <h2 className="text-3xl font-bold bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-            Task Manager Pro
-          </h2>
+        <div className="mb-6">
+          <h2 className="text-2xl font-semibold text-gray-800">Task Manager</h2>
+          <p className="text-sm text-gray-500 mt-1">Organize and track your tasks</p>
         </div>
 
         {/* Stats Dashboard */}
         <div className="grid grid-cols-3 gap-3 mb-6">
-          <div className="bg-gradient-to-br from-blue-400 to-blue-500 rounded-xl p-3 text-white text-center shadow-lg">
-            <div className="text-2xl font-bold">{stats.total}</div>
-            <div className="text-xs opacity-90">Total Tasks</div>
+          <div className="bg-blue-50 rounded-lg p-3 text-center border border-blue-100">
+            <div className="text-2xl font-bold text-blue-600">{stats.total}</div>
+            <div className="text-xs text-gray-600">Total Tasks</div>
           </div>
-          <div className="bg-gradient-to-br from-green-400 to-emerald-500 rounded-xl p-3 text-white text-center shadow-lg">
-            <div className="text-2xl font-bold">{stats.completed}</div>
-            <div className="text-xs opacity-90">Completed ✔️</div>
+          <div className="bg-green-50 rounded-lg p-3 text-center border border-green-100">
+            <div className="text-2xl font-bold text-green-600">{stats.completed}</div>
+            <div className="text-xs text-gray-600">Completed</div>
           </div>
-          <div className="bg-gradient-to-br from-orange-400 to-red-500 rounded-xl p-3 text-white text-center shadow-lg">
-            <div className="text-2xl font-bold">{stats.pending}</div>
-            <div className="text-xs opacity-90">Pending ⏳</div>
+          <div className="bg-orange-50 rounded-lg p-3 text-center border border-orange-100">
+            <div className="text-2xl font-bold text-orange-600">{stats.pending}</div>
+            <div className="text-xs text-gray-600">Pending</div>
           </div>
         </div>
 
         {/* Add Task Section */}
-        <div className="flex gap-3 mb-6">
-          <div className="relative flex-1">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span className="text-xl">📝</span>
-            </div>
-            <input
-              className="w-full pl-10 pr-4 py-3 rounded-xl border-2 border-blue-200 focus:border-blue-400 focus:outline-none focus:ring-4 focus:ring-blue-200 transition-all text-gray-700 placeholder-gray-400 bg-white/80"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="What's your next task? "
-              onKeyPress={(e) => e.key === "Enter" && addTask()}
-            />
-          </div>
+        <div className="flex gap-2 mb-6">
+          <input
+            className="flex-1 px-3 py-2 rounded-lg border border-gray-300 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500 text-gray-700"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            placeholder="Enter a new task..."
+            onKeyPress={(e) => e.key === "Enter" && addTask()}
+          />
           <button
             onClick={addTask}
-            className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-6 py-3 rounded-xl font-semibold hover:from-blue-600 hover:to-cyan-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-blue-300/50 flex items-center gap-2"
+            className="bg-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:bg-blue-700 transition-colors"
           >
-            <span>➕</span> Add
+            Add Task
           </button>
         </div>
 
@@ -98,163 +92,112 @@ const TaskManager = () => {
         <div className="flex gap-2 mb-4">
           <button
             onClick={() => setFilter("all")}
-            className={`flex-1 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 ${
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               filter === "all"
-                ? "bg-gradient-to-r from-blue-500 to-cyan-500 text-white shadow-md"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-blue-600 text-white"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
-            All 📋
+            All
           </button>
           <button
             onClick={() => setFilter("pending")}
-            className={`flex-1 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 ${
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               filter === "pending"
-                ? "bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-md"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-orange-600 text-white"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
-            Pending ⏳
+            Pending
           </button>
           <button
             onClick={() => setFilter("completed")}
-            className={`flex-1 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 ${
+            className={`px-3 py-1.5 rounded-md text-sm font-medium transition-colors ${
               filter === "completed"
-                ? "bg-gradient-to-r from-green-500 to-emerald-500 text-white shadow-md"
-                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                ? "bg-green-600 text-white"
+                : "bg-gray-100 text-gray-700 hover:bg-gray-200"
             }`}
           >
-            Completed ✔️
+            Completed
           </button>
         </div>
 
         {/* Tasks List */}
         {filteredTasks.length === 0 ? (
-          <div className="text-center py-12 bg-gradient-to-br from-gray-50 to-gray-100 rounded-2xl">
-            <div className="text-6xl mb-3">🎉</div>
-            <p className="text-gray-500 text-lg">No tasks to show!</p>
-            <p className="text-gray-400 text-sm">
+          <div className="text-center py-12 bg-gray-50 rounded-lg border border-gray-200">
+            <div className="text-4xl mb-2">📋</div>
+            <p className="text-gray-500">No tasks to display</p>
+            <p className="text-sm text-gray-400 mt-1">
               {filter === "all" 
-                ? "Add your first task above " 
+                ? "Add your first task to get started" 
                 : filter === "completed" 
-                ? "Complete some tasks to see them here " 
-                : "You have no pending tasks! Great job! "}
+                ? "Complete some tasks to see them here" 
+                : "All tasks completed! Great job"}
             </p>
           </div>
         ) : (
-          <ul className="space-y-3 max-h-96 overflow-y-auto custom-scrollbar">
-            {filteredTasks.map((task, index) => {
+          <ul className="space-y-2 max-h-96 overflow-y-auto">
+            {filteredTasks.map((task) => {
               const isCompleted = task.status === "completed";
-              const gradients = [
-                "from-indigo-50 to-purple-50 border-indigo-200",
-                "from-pink-50 to-rose-50 border-pink-200",
-                "from-green-50 to-emerald-50 border-green-200",
-                "from-yellow-50 to-amber-50 border-yellow-200",
-                "from-cyan-50 to-blue-50 border-cyan-200",
-              ];
               return (
                 <li
                   key={task._id}
-                  className={`group relative overflow-hidden bg-gradient-to-r ${gradients[index % gradients.length]} border-2 rounded-xl p-4 transition-all duration-300 hover:shadow-xl hover:-translate-y-0.5 ${
-                    isCompleted ? "opacity-75" : ""
+                  className={`flex justify-between items-center p-3 rounded-lg border transition-all ${
+                    isCompleted
+                      ? "bg-gray-50 border-gray-200"
+                      : "bg-white border-gray-200 hover:border-gray-300"
                   }`}
                 >
-                  {/* Animated background effect */}
-                  <div className={`absolute -right-12 -top-12 w-24 h-24 rounded-full opacity-10 transition-all duration-500 ${
-                    isCompleted ? "bg-green-400" : "bg-blue-400"
-                  } group-hover:scale-150`}></div>
-                  
-                  <div className="flex justify-between items-center relative z-10">
-                    <div className="flex items-center gap-3 flex-1">
-                      {/* Task icon */}
-                      <div className="text-2xl">
-                        {isCompleted ? "✅" : "📌"}
-                      </div>
-                      <div className="flex-1">
-                        <span
-                          className={`text-lg font-semibold transition-all ${
-                            isCompleted
-                              ? "line-through text-gray-400"
-                              : "text-gray-800"
-                          }`}
-                        >
-                          {task.title}
-                        </span>
-                        {isCompleted && (
-                          <div className="text-xs text-green-600 mt-1 flex items-center gap-1">
-                            <span>✨</span> Completed!
-                          </div>
-                        )}
-                      </div>
+                  <div className="flex items-center gap-3 flex-1">
+                    <div className="text-lg">
+                      {isCompleted ? "✓" : "○"}
                     </div>
-
-                    <div className="flex gap-2">
-                      <button
-                        onClick={() => toggleStatus(task)}
-                        className={`group/btn relative overflow-hidden px-4 py-2 rounded-lg font-semibold transition-all transform hover:scale-105 flex items-center gap-1 ${
-                          isCompleted
-                            ? "bg-orange-400 hover:bg-orange-500 text-white"
-                            : "bg-gradient-to-r from-green-400 to-emerald-500 text-white hover:shadow-lg"
+                    <div className="flex-1">
+                      <span
+                        className={`text-gray-800 ${
+                          isCompleted ? "line-through text-gray-400" : ""
                         }`}
                       >
-                        <span className="relative z-10 flex items-center gap-1">
-                          {isCompleted ? " Undo" : " Done"}
-                        </span>
-                      </button>
-                      <button
-                        onClick={() => deleteTask(task._id)}
-                        className="bg-white/50 hover:bg-red-500 text-red-600 hover:text-white px-3 py-2 rounded-lg font-bold transition-all transform hover:scale-105 backdrop-blur-sm"
-                      >
-                        ✖
-                      </button>
+                        {task.title}
+                      </span>
                     </div>
                   </div>
 
-                  {/* Progress indicator for pending tasks */}
-                  {!isCompleted && (
-                    <div className="mt-3 h-1 bg-gray-200/50 rounded-full overflow-hidden">
-                      <div className="h-full bg-gradient-to-r from-blue-400 to-cyan-500 rounded-full animate-pulse" style={{ width: "30%" }}></div>
-                    </div>
-                  )}
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => toggleStatus(task)}
+                      className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+                        isCompleted
+                          ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
+                          : "bg-green-50 text-green-700 hover:bg-green-100 border border-green-200"
+                      }`}
+                    >
+                      {isCompleted ? "Undo" : "Complete"}
+                    </button>
+                    <button
+                      onClick={() => deleteTask(task._id)}
+                      className="px-3 py-1 rounded-md text-sm font-medium bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 transition-colors"
+                    >
+                      Delete
+                    </button>
+                  </div>
                 </li>
               );
             })}
           </ul>
         )}
 
-        {/* Motivational Footer */}
-        <div className="mt-6 text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-yellow-100 to-orange-100 rounded-full">
-       
-            <span className="text-sm text-gray-700 font-medium">
-              {stats.completed === stats.total && stats.total > 0 
-                ? "🎉 Amazing! You've completed all tasks! 🎉" 
-                : stats.pending > 0 
-                ? `You have ${stats.pending} task${stats.pending > 1 ? 's' : ''} left. You've got this! 🌟`
-                : "Start your journey by adding a task! 🚀"}
-            </span>
-            <span className="text-lg"></span>
-          </div>
+        {/* Footer */}
+        <div className="mt-6 pt-4 border-t border-gray-200 text-center">
+          <p className="text-sm text-gray-500">
+            {stats.completed === stats.total && stats.total > 0 
+              ? "All tasks completed. Great work!" 
+              : stats.pending > 0 
+              ? `${stats.pending} task${stats.pending > 1 ? 's' : ''} remaining`
+              : "No tasks yet. Add one to get started"}
+          </p>
         </div>
       </div>
-
-      {/* Custom scrollbar styles - add to your global CSS or use a style tag */}
-      <style jsx>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          width: 8px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: #f1f1f1;
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #3b82f6, #06b6d4);
-          border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(to bottom, #2563eb, #0891b2);
-        }
-      `}</style>
     </div>
   );
 };
